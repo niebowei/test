@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 404px;
+            margin: 20px auto;
+        }
+
+        h3 {
+            width: 404px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        p {
+            width: 404px;
+            overflow: hidden;
+            border: 1px solid black;
+            border-right: none;
+        }
+        p span {
+            float: left;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-right: 1px solid black;
+        }
+        ul{
+            list-style: none;
+            border: 1px solid black;
+            border-top: none;
+        }
+        ul li{
+            overflow: hidden;
+        }
+        ul li span{
+            float: left;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-right: 1px solid black;
+        }
+        button {
+            width: 100px;
+            height:30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>crm用户系统</h3>
+    <button onclick="window.open('./addUser.html')">增加</button>
+    <p><span>id</span><span>name</span><span>email</span><span>操作</span></p>
+</div>
+<script src="jquery-1.8.3.min.js"></script>
+<script>
+    $(function () {
+        $.ajax({
+            url:'/getUserData',
+            type:'GET',
+            dataType:'json',
+            success:function (data) {
+                console.log(data);
+                if(data&&data.error==0){
+                    bindData(data["data"])
+                }
+            }
+        });
+        function bindData(data) {
+            let str = '<ul>'
+            $.each(data,function () {
+                str += `
+                    <li>
+                    <span>${this.id}</span>
+                    <span>${this.name}</span>
+                    <span>${this.tel}</span>
+                    <span><a href="updata.html?uid=${this.id}">修改</a><a  data-rid=${this.id} class="removeBtn" >删除</a></span>
+                    </li>
+                `
+            });
+            str+="</ul>"
+            $(".container").append(str)
+
+            for (let i =0;i<$(".removeBtn").length;i++){
+                let curBtn = $(".removeBtn")[i];
+                curBtn.onclick = function () {
+                    let rid = this.getAttribute('data-rid');
+                    $.ajax({
+                        url:"/removeInfo",
+                        type:"GET",
+                        dataType:"json",
+                        data:{id:rid},
+                        success:function (data) {
+                            console.log(data)
+                        }
+                    })
+                }
+            }
+
+
+
+
+        }
+
+    })
+</script>
+</body>
+</html>

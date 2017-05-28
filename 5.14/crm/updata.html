@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="user">
+<input type="text" id="tel">
+<button id="submit">确认修改</button>
+<script src="./jquery-1.8.3.min.js"></script>
+<script>
+    $(function () {
+        console.log(window.location.href);
+
+        function getUrlParam(url) {
+            let reg=/([^?&=]+)=([^?&=]+)/g;
+            let obj={};
+            url.replace(reg,function () {
+                obj[arguments[1]]=arguments[2];
+            });
+            return obj;
+        }
+        var uid = getUrlParam(window.location.href).uid;
+        $("#submit").click(function () {
+            let userVal = $("#user").val();
+            let telVal = $("#tel").val();
+            let obj = {id:uid,name:userVal,tel:telVal}
+            $.ajax({
+                url:'/getUserInfo',
+                type:'POST',
+                dataType:"json",
+                data:obj,
+                success:function (result) {
+                    console.log(result)
+                }
+            })
+
+        })
+    })
+</script>
+</body>
+</html>

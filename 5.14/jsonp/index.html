@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+//    let xhr = new XMLHttpRequest();
+//    xhr.open('get',url,true);
+//    xhr.responseType = 'json'
+//    xhr.onreadystatechange = function () {
+//        if (this.readyState === 4 && /^2\d{2}$/.test(this.status)){
+//            console.log()
+//        }
+//    }
+//因为script不存在跨域
+let oScript = document.createElement("script");
+//与后台协商共同字段  后台拿到字段xxx为函数名  以拼接的形式通过该回调函数返还给前端
+    oScript.scr = "地址?cd=xxx";
+    document.body.appendChild(oScript);
+
+    function xxx() {
+        console.log()
+    }
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

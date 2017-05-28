@@ -1,0 +1,7 @@
+node 就是一个运行环境 可以js运行在服务端
+浏览器端不能操作本地文件
+非阻塞异步I/O
+commonjs 规范  模块化  require() 引入 module.exports 导出
+基于谷歌V8引擎
+npm 包管理器 bower
+node安装

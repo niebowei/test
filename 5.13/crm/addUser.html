@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="user">
+<input type="text" id="tel">
+<button id="submit">增加</button>
+
+<script src="./jquery-1.8.3.min.js"></script>
+<script>
+    $(function () {
+        $("#submit").click(function () {
+            let userVal = $("#user").val();
+            let telVal = $("#tel").val();
+            let obj = {name:userVal,tel:telVal}
+            $.ajax({
+                url:'/addUserData',
+                type:'POST',
+                data:obj,
+                success:function (result) {
+                    console.log(result)
+                }
+            })
+
+        })
+    })
+</script>
+</body>
+</html>
